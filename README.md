@@ -1,4 +1,4 @@
-# CineeBot | Movies Heaven
+# CineeBot | Chat, Discover, Watch.
 
 CineeBot is a movie discovery platform where users can explore various movies based on genres, providing a seamless and interactive experience powered by IBM WatsonX Assistant for personalized interactions.
 
