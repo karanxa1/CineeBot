@@ -7,98 +7,23 @@
     <title>CineeBot | Movies Heaven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
         body {
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
-            position: relative;
-            overflow: hidden;
         }
-
-        /* Gradient Background */
-        .gradient-bg {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            background: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
-        }
-
-        .gradient-bg .gradients-container {
-            filter: url(#goo) blur(40px);
-            width: 100%;
-            height: 100%;
-        }
-
-        .g1, .g2, .g3, .g4, .g5, .interactive {
-            position: absolute;
-            border-radius: 50%;
-            mix-blend-mode: hard-light;
-            animation: move 20s infinite;
-        }
-
-        .g1 {
-            background: rgba(18, 113, 255, 0.8);
-            width: 80%;
-            height: 80%;
-            animation-duration: 30s;
-        }
-
-        .g2 {
-            background: rgba(221, 74, 255, 0.8);
-            width: 60%;
-            height: 60%;
-            animation-duration: 20s;
-        }
-
-        .g3 {
-            background: rgba(100, 220, 255, 0.8);
-            width: 70%;
-            height: 70%;
-            animation-duration: 40s;
-        }
-
-        .g4 {
-            background: rgba(200, 50, 50, 0.8);
-            width: 90%;
-            height: 90%;
-            animation-duration: 25s;
-        }
-
-        .g5 {
-            background: rgba(180, 180, 50, 0.8);
-            width: 100%;
-            height: 100%;
-            animation-duration: 35s;
-        }
-
-        @keyframes move {
-            0% {
-                transform: translate(0, 0);
-            }
-            50% {
-                transform: translate(50px, -50px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        /* Content Container */
+        
         .container {
             min-height: 90vh;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             backdrop-filter: blur(5px);
-            z-index: 1;
-            position: relative;
         }
-
+        
         h1 {
             text-align: center;
             font-size: 2.5rem;
@@ -106,13 +31,13 @@
             color: rgb(242, 79, 3);
             font-family: cursive;
         }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
             }
         }
-
+        
         form {
             display: flex;
             justify-content: center;
@@ -120,7 +45,7 @@
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
-
+        
         select,
         button {
             padding: 10px;
@@ -129,24 +54,24 @@
             border: none;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-
+        
         button {
             background-color: #6c63ff;
             color: white;
             cursor: pointer;
         }
-
+        
         button:hover {
             background-color: #5a54e8;
         }
-
+        
         .gallery {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
         }
-
+        
         .card {
             flex: 1 1 calc(25% - 10px);
             max-width: calc(25% - 10px);
@@ -161,21 +86,21 @@
             justify-content: flex-end;
             overflow: hidden;
         }
-
+        
         @media (max-width: 768px) {
             .card {
                 flex: 1 1 calc(50% - 10px);
                 max-width: calc(50% - 10px);
             }
         }
-
+        
         @media (max-width: 480px) {
             .card {
                 flex: 1 1 calc(100% - 10px);
                 max-width: calc(100% - 10px);
             }
         }
-
+        
         .card-info {
             background: rgba(0, 0, 0, 0.7);
             padding: 10px;
@@ -183,32 +108,40 @@
             font-size: 0.85rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
         }
+        
+        .load-more {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ff5252;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 82, 82, 0.8);
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            padding: 0;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        .load-more::after {
+            content: "+";
+            font-size: 2rem;
+        }
+        
+        .load-more:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 82, 82, 1);
+        }
     </style>
 </head>
 
 <body>
-    <!-- Animated Gradient Background -->
-    <div class="gradient-bg">
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="goo">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-                    <feBlend in="SourceGraphic" in2="goo" />
-                </filter>
-            </defs>
-        </svg>
-        <div class="gradients-container">
-            <div class="g1"></div>
-            <div class="g2"></div>
-            <div class="g3"></div>
-            <div class="g4"></div>
-            <div class="g5"></div>
-            <div class="interactive"></div>
-        </div>
-    </div>
-
-    <!-- Content -->
     <div class="container">
         <h1>CineeBot</h1>
         <form id="omdbForm">
@@ -216,16 +149,148 @@
                 <option value="">Select a genre or term</option>
                 <option value="Horror">Horror</option>
                 <option value="Action">Action</option>
-                <!-- Add more genres -->
+                <option value="Drama">Drama</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Science fiction">Science Fiction</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Western">Western</option>
+                <option value="Crime film">Crime Film</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Documentary">Documentary</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Noir">Noir</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Musical">Musical</option>
+                <option value="Romantic comedy">Romantic Comedy</option>
+                <option value="Musical genre">Musical Genre</option>
+                <option value="Music">Music</option>
+                <option value="Martial Arts">Martial Arts</option>
+                <option value="Narrative">Narrative</option>
+                <option value="Historical film">Historical Film</option>
+                <option value="Experimental">Experimental</option>
+                <option value="Feature film">Feature Film</option>
+                <option value="Melodrama">Melodrama</option>
+                <option value="Indie film">Indie Film</option>
+                <option value="Disaster">Disaster</option>
+                <option value="Magical Realism">Magical Realism</option>
+                <option value="Short">Short</option>
+                <option value="Hindi cinema">Hindi Cinema</option>
+                <option value="Spaghetti western">Spaghetti Western</option>
+                <option value="Anime">Anime</option>
+                <option value="Crime">Crime</option>
+                <option value="Hybrid genre">Hybrid Genre</option>
+                <option value="Slasher">Slasher</option>
+                <option value="Television">Television</option>
+                <option value="Crime fiction">Crime Fiction</option>
+                <option value="Historical Fiction">Historical Fiction</option>
+                <option value="History">History</option>
+                <option value="War">War</option>
+                <option value="Abstract animation film">Abstract Animation Film</option>
             </select>
             <button type="button" id="random">Random Genre</button>
             <button type="submit">Search</button>
         </form>
         <div class="gallery" id="gallery"></div>
     </div>
+    <button id="loadMore" class="load-more" style="display: none;"></button>
 
     <script>
-        // Your existing JavaScript logic here
+        const form = document.getElementById('omdbForm');
+        const gallery = document.getElementById('gallery');
+        const loadMore = document.getElementById('loadMore');
+        const randomBtn = document.getElementById('random');
+        const searchTerms = ["Horror", "Action", "Drama", "Comedy", "Romance", "Science fiction", "Thriller", "Western", "Crime film", "Adventure"];
+
+        let currentSearch = "";
+        let currentPage = 1;
+        let totalPages = 0;
+
+        function fetchMovies() {
+            if (!currentSearch) return;
+
+            const url = `https://www.omdbapi.com/?apikey=e354606c&s=${encodeURIComponent(currentSearch)}&page=${currentPage}&r=json`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.Response === "True") {
+                        renderMovies(data.Search);
+                        const totalResults = parseInt(data.totalResults);
+                        totalPages = Math.ceil(totalResults / 10);
+                        loadMore.style.display = currentPage < totalPages ? "block" : "none";
+                    } else {
+                        alert("No movies found!");
+                    }
+                })
+                .catch(console.error);
+        }
+
+        function renderMovies(movies) {
+            movies.forEach(movie => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.backgroundImage = `url(${movie.Poster})`;
+
+                const info = document.createElement('div');
+                info.className = 'card-info';
+                info.innerHTML = `<h3>${movie.Title}</h3><p>${movie.Year}</p><p>Type: ${movie.Type}</p>`;
+
+                card.addEventListener('click', () => {
+                    window.open(`https://www.google.com/search?q=${movie.Title}+${movie.Year}`, '_blank');
+                });
+
+                card.appendChild(info);
+                gallery.appendChild(card);
+            });
+        }
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            currentSearch = document.getElementById('s').value;
+            currentPage = 1;
+            gallery.innerHTML = "";
+            fetchMovies();
+        });
+
+        loadMore.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                fetchMovies();
+            }
+        });
+
+        randomBtn.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * searchTerms.length);
+            document.getElementById('s').value = searchTerms[randomIndex];
+        });
+
+        function getURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('s')) {
+                currentSearch = params.get('s');
+                currentPage = parseInt(params.get('page')) || 1;
+                fetchMovies();
+            }
+        }
+
+        getURLParams();
+    </script>
+    <script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "42e331c3-3d55-49c0-8e10-500b79067a4d",
+            region: "au-syd",
+            serviceInstanceID: "353aac52-f6a3-49ec-9cae-0ec9c9da23dd",
+            onLoad: async(instance) => {
+                await instance.render();
+            }
+        };
+        setTimeout(function() {
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
     </script>
 </body>
 
